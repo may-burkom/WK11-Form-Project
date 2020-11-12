@@ -56,7 +56,7 @@ app.post('/save', function(req, res){
     newUser.save()
         .then(function(savedUser){
             console.log(savedUser)
-            res.render('home', {newUser:`${savedUser.name} added successfully!`})
+            res.render('home', {newUser:`${savedUser.name} added successfully!`, notFound:""})
         })
         .catch(function(err){
             console.log(err)

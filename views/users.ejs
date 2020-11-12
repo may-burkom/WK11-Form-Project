@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./home.css">
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <h3>Users found:</h3>
-        <h4>
-            <p> 
-                <%let foundUser = fUser%>
-                <%if (foundUser){ %> 
-                    <%= foundUser[0].name %> <button id="<%= foundUser[0]._id %>">DELETE</button>
-                <%}%>
-            </p>
-            
-        </h4>
+    <div id="container">
+        <h1>Results</h1>
+        <hr>
+        <div>
+            <h3>Users found:</h3>
+            <h4>
+                <p> 
+                    <%let foundUser = fUser%>
+                    <%if (foundUser){ %> 
+                        <%= foundUser[0].name %> <button id="<%= foundUser[0]._id %>">DELETE</button>
+                    <%}%>
+                </p>
+                
+            </h4>
+        </div>
+
+        <div>
+            <a href="/">Back to Sign-up</a>
+        </div>
     </div>
 
-    <div>
-        <a href="/">Back to Sign-up</a>
-    </div>
+    
 
     <script>
         console.log("user js running...")
