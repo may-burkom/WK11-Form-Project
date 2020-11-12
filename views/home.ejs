@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="./home.css">
     <title>Project</title>
 </head>
 <body>
@@ -43,54 +43,16 @@
                     <input type="submit" value="Find user">
                 </div>
             </form>
+            <div>
+                <h4><%=notFound%></h4>
+            </div>
         </div>
         <hr>
-        <div>
-            <p>Delete user</p>
-            <form id="deleteForm">
-                <div>
-                    <label for="dltUser">NAME:</label>
-                    <input type="text" name="dltUser" id="dltUser">
-                </div>
-                <div>
-                    <input type="submit" value="DELETE">
-                </div> 
-            </form>
-        </div>
-        <hr>
+    
     </div>
 
     <script>
-        console.log("home.js in js folder running...")
-
-        const display = document.querySelector("#nameDisplay")
-        const deleteForm = document.querySelector("#deleteForm")
-
-        deleteForm.addEventListener("submit", function(event){
-            event.preventDefault()
-            let deleteFormData = new FormData(deleteForm)
-            const dataAsObject = Object.fromEntries(deleteFormData.entries())
-            const dataAsJSONString = JSON.stringify(dataAsObject)
-
-            let xhr = new XMLHttpRequest()
-            let deleteRoute = "http://localhost:4040/delete"
-            xhr.open("DELETE", deleteRoute, true)
-            console.log(dataAsJSONString)
-            
-
-            xhr.onreadystatechange = function(){
-                //check that readyState is 4 = request finished and response is ready
-                // check that status is 200 = OK
-                if(this.readyState === 4 && this.status === 200){
-                    //save response to variable
-                    let res = xhr.responseText
-                    console.log(res)
-                    console.log("DELETE success")
-                }
-            }
-
-            xhr.send(null)
-        })
+        
 
     </script>
 </body>

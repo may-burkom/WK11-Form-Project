@@ -25,7 +25,7 @@ mongoose.connect('mongodb+srv://may831:tempPassword123@smbootcamp2020.dw1al.gcp.
 )
 
 app.get('/', function(req, res){
-    res.render('home', {newUser:""})
+    res.render('home', {newUser:"", notFound:""})
 })
 
 app.get('/findusers', function(req, res){
@@ -34,7 +34,11 @@ app.get('/findusers', function(req, res){
     User.find({name: searchName})
         .then(function(user){
             console.log(user)
-            res.render('users', {foundUser: user[0].name})
+            if(user.length > 0){
+                res.render('users', {fUser: user})
+            } else{
+                res.render('home', {newUser:"", notFound: "User not found."})
+            }
         })
         .catch(function(error){
             console.log(error)
@@ -59,19 +63,19 @@ app.post('/save', function(req, res){
         })
 })
 
-app.delete('/delete', function(req, res) {
+app.delete('/delete/:id', function(req, res) {
     console.log("DELETE ROUTE hit")
-    console.log(req.body) 
+    console.log(req.params.id) 
 
-    // User.findByIdAndDelete(req.params.id)
-    //     .then(function(x) {
-    //         console.log("User deleted:")
-    //         console.log(x)
-    //     })
-    //     .catch(function(err) {
-    //         console.log(err)
-    //         res.send(err)
-    //     })
+    User.findByIdAndDelete(req.params.id)
+        .then(function(x) {
+            console.log("User deleted:")
+            console.log(x)
+        })
+        .catch(function(err) {
+            console.log(err)
+            res.send(err)
+        })
     
 });
 

@@ -9,12 +9,48 @@
     <div>
         <h3>Users found:</h3>
         <h4>
-            <%=foundUser%>
+            <p> 
+                <%let foundUser = fUser%>
+                <%if (foundUser){ %> 
+                    <%= foundUser[0].name %> <button id="<%= foundUser[0]._id %>">DELETE</button>
+                <%}%>
+            </p>
+            
         </h4>
     </div>
 
     <div>
         <a href="/">Back to Sign-up</a>
     </div>
+
+    <script>
+        console.log("user js running...")
+
+        const deleteBtn = document.querySelector("button")
+
+        deleteBtn.addEventListener("click", function(event){
+            event.preventDefault()
+            let btnId = deleteBtn.id
+
+            let xhr = new XMLHttpRequest()
+            let deleteRoute = `http://localhost:4040/delete/${btnId}`
+            xhr.open("DELETE", deleteRoute, true)
+            
+            xhr.onreadystatechange = function(){
+                //check that readyState is 4 = request finished and response is ready
+                // check that status is 200 = OK
+                if(this.readyState === 4 && this.status === 200){
+                    //save response to variable
+                    let res = xhr.responseText
+                    console.log(res)
+                    console.log("DELETE success")
+                }
+            }
+
+            xhr.send()
+        })
+
+
+    </script>
 </body>
 </html>
